@@ -1,0 +1,16 @@
+vagrant ssh manager
+vagrant up
+vagrant destroy
+vagrant global-status
+
+docker swarm init --advertise-addr=192.168.56.101
+docker swarm join --token <token> 192.168.0.101:2377
+docker node ls
+
+docker service create --replicas=3 --name nginx-service nginx
+docker service ls
+docker service ps <name>
+docker service inspect <name>
+
+docker service scale nginx-service=4
+docker service update -- <name>
