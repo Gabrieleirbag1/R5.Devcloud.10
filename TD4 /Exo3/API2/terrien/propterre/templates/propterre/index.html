@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        {% load static %}
+    <title> Site Web - Index </title>
+   
+            <link rel="stylesheet" type="text/css" href="{%static 'propterre/indexiou.css'%}">
+            
+
+
+        </head>
+
+    <div class="bouttonshaut">
+        <h1> <a href='/propterre/ajout'><button class='ajout-button'> CRÉER UN FORMULAIRE </button></a> </h1>
+       
+    </div>
+       
+    <body id="background">
+
+
+    <h1> AU REVOIR</h2> 
+        <div class="tout">  
+            <img src="{% static '/propterre/images/ken.jpg' %}" type='image/jpeg'>
+                
+                {% for pt in Pt_charge%}
+                        <div class="infos">
+                            <p>
+                                Lieu : {{pt.lieu}}</p>
+                            <p>  Surface : {{pt.surface}} m²</p>
+                            <p> Paru le : {{pt.date_mise|date:"d/m/Y"}}</p>
+                            <p> Type de culture : {{pt.culture}} </p>
+                            <p> Renseignements : {{pt.renseignements}}</p>
+                            <p>Jachere ou non : {{pt.jachere}}</p>
+
+                            <a href='affiche/{{ pt.id}}'><button id="affiche"> Afficher</button></a>
+                            <a href='update/{{ pt.id}}'><button id='update'> Update</button></a>
+                            <a href='delete/{{ pt.id}}'><button id='delete'> Delete</button></a>
+                        </div>     
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+    </body>
+</html>
+
+<!--{{l.date_parution|date:"d/m/Y"}} -->

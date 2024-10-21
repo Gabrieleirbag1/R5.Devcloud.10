@@ -1,0 +1,25 @@
+services:
+  nginx:
+    image: nginx:latest
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets:
+      - mysql_root_password
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3306:3306"
+
+secrets:
+  mysql_root_password:
+    external: true

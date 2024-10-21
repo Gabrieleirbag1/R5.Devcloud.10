@@ -1,0 +1,38 @@
+services:
+  api1:
+    image: api1
+#    build: 
+#      context: ./API1
+#      dockerfile: Dockerfile
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8000:8000"
+
+  api2:
+    image: api2
+#    build: ./API2
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8001:8000"
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets:
+      - mysql_root_password
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3306:3306"
+
+secrets:
+  mysql_root_password:
+    external: true

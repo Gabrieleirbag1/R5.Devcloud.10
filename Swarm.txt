@@ -11,6 +11,13 @@ docker service create --replicas=3 --name nginx-service nginx
 docker service ls
 docker service ps <name>
 docker service inspect <name>
-
 docker service scale nginx-service=4
-docker service update -- <name>
+docker service update -- <name>$
+
+echo "toto" | docker secret create mysql_root_password -
+
+docker stack deploy -c <compose> <monapp> 
+    --detach=false
+
+docker stack services monapp
+docker stack ps

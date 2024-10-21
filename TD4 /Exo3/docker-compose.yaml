@@ -1,0 +1,47 @@
+services:
+  api1:
+    image: api1
+#    build: 
+#      context: ./API1
+#      dockerfile: Dockerfile
+    environment:
+       DJANGO_SETTINGS_MODULE: myapp.settings
+    configs:
+       - source: django_settings
+         target: /app/terrien/terrien/settings.py
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8000:8000"
+
+  apache:
+    image: httpd
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets:
+      - mysql_root_password
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3306:3306"
+
+secrets:
+  mysql_root_password:
+    external: true
+
+configs:
+  django_settings:
+    external: true
