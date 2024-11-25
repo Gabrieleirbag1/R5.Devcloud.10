@@ -1,0 +1,10 @@
+1) Combiner les commandes RUN : 
+Combiner plusieurs commandes RUN en une seule réduit le nombre de couches dans l'image.
+
+2) Nettoyer le cache APT : 
+Supprimer le cache APT après l'installation des paquets réduit la taille de l'image.
+--> rm -rf /var/lib/apt/lists/*
+
+3) Utiliser une image de base plus spécifique : 
+Utiliser une image de base plus petite qui inclut uniquement les composants nécessaires
+--> Ici on prendra debian:bookworm-slim

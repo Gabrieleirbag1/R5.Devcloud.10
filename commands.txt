@@ -1,0 +1,16 @@
+kubectl get nodes
+
+kubectl get pods
+kubectl get pods -n kube-system
+
+kubectl get deployments
+
+kubectl get services
+
+kubectl logs <pod-name>
+
+kubectl describe deployment <deployment-name>
+
+kubectl apply -f /vagrant/compose/nginx-deployment.yaml
+kubectl apply -f /vagrant/compose/nginx-service.yaml
+
